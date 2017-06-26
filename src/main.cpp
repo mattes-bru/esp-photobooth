@@ -12,9 +12,9 @@
 
 
 #define COUNTDOWN_LENGTH 3000
-#define FOCUS_TIME 500
+#define FOCUS_TIME 2000
 #define LOOP_INTERVAL 100
-#define MAX_PHOTO_COUNT 2
+#define MAX_PHOTO_COUNT 3
 
 #define NUM_LEDS 12
 #define BRIGHTEN_RATE 20
@@ -229,17 +229,18 @@ void loop()
                 digitalWrite(TRIGGER_PIN, LOW);
                 delay(100);
                 digitalWrite(TRIGGER_PIN, HIGH);
-                digitalWrite(FOCUS_PIN, HIGH);
+
 
                 FastLED.showColor(CRGB::Black);
 
                 focusActive = false;
                 if(photoCount < MAX_PHOTO_COUNT) {
                         mainState = STATE_COUNTDOWN;
-                        countDownStart = millis()-2000;
+                        countDownStart = millis()-1000;
                         photoCount++;
                 }
                 else {
+                        digitalWrite(FOCUS_PIN, HIGH);
                         mainState = STATE_IDLE;
                         photoCount = 0;
 
